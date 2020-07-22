@@ -4,17 +4,33 @@ import s from "./CommentList.module.scss";
 import Comment from "../Comment";
 
 class CommentList extends React.Component{
+    state = {
+        commentSelected: "",
+    };
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.activeComment !== this.props.activeComment) {
+            this.changeSelectedComment(this.props.activeComment);
+        }
+    }
+
+    changeSelectedComment = (comment) => {
+        this.setState({
+            commentSelected: comment,
+        })
+    };
 
     render() {
-        const { commentsList, activeComment }=this.props;
+        const { commentsList, activeComment, onCommentClick }=this.props;
+        const { commentSelected } = this.state;
         return(
             <div className={s.commentList}>
                 {
                     commentsList.map((item) =>
                         <button
-                            onClick={()=>console.log(item.id)}
+                            onClick={()=>onCommentClick(item)}
                             className={
-                                activeComment===item.id? `${s.commentTab} ${s.commentTab_active}`:`${s.commentTab}`
+                                commentSelected.id===item.id? `${s.commentTab} ${s.commentTab_active}`:`${s.commentTab}`
                             }
                             key={item.id}
                         >

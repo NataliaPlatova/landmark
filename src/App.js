@@ -16,7 +16,7 @@ class App extends React.Component{
 
     changeActiveMarker = (point) => {
         this.setState({
-            activeMarker: point.id,
+            activeMarker: point,
         })
     };
 
@@ -25,8 +25,8 @@ class App extends React.Component{
         return (
             <div className="App">
                 <div className={s.container}>
-                    <Map onMarkerClick={this.changeActiveMarker}/>
-                    <CommentList activeComment={activeMarker} commentsList={markers}/>
+                    <Map onMarkerClick={this.changeActiveMarker} activeMarker={activeMarker}/>
+                    <CommentList activeComment={activeMarker} commentsList={markers} onCommentClick={this.changeActiveMarker}/>
                 </div>
             </div>
         );

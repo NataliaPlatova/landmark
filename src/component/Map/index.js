@@ -13,16 +13,22 @@ class Map extends React.Component {
     state = {
         center: {
             lat: 45,
-            lng: 75
+            lng: 75,
         },
         zoom: 3
     };
 
-    changeCenter = (point) => {
+    componentDidUpdate(prevProps) {
+        if (prevProps.activeMarker !== this.props.activeMarker) {
+            this.changeCenter(this.props.activeMarker.lat, this.props.activeMarker.lng)
+        }
+    }
+
+    changeCenter = (lat, lng) => {
         this.setState({
             center: {
-                lat: point.lat,
-                lng: point.lng
+                lat,
+                lng
             },
             zoom: 5
         });
@@ -30,7 +36,7 @@ class Map extends React.Component {
 
     render() {
         const { center, zoom } = this.state;
-        const { onMarkerClick } = this.props;
+        const { activeMarker, onMarkerClick } = this.props;
 
         return (
             <LoadScript
@@ -53,7 +59,7 @@ class Map extends React.Component {
                                 text={marker.text}
                                 onClick={()=>{
                                     onMarkerClick(marker);
-                                    this.changeCenter(marker);
+                                    this.changeCenter(marker.lat, marker.lng);
                                 }}
                             />
                         )
