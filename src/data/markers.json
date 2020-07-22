@@ -1,11 +1,13 @@
 [
   {
+    "id": 1,
     "name": "Natasha",
     "text": "I hate everyone",
     "lat": 59.955413,
     "lng": 30.337844
   },
   {
+    "id": 2,
     "name": "Nastya",
     "text": "I love everyone",
     "lat": 30.955413,

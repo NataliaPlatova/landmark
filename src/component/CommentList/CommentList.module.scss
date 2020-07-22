@@ -4,3 +4,13 @@
     width: 30%;
     padding: 24px;
 }
+
+.commentTab {
+    background-color: rgba(0, 0, 0, 0);
+    text-align: left;
+    border: none;
+    padding: 0;
+    &:hover, &:focus, &:active {
+        outline: none;
+    }
+}
