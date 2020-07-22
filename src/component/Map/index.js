@@ -1,22 +1,31 @@
 import React from "react";
 import {GoogleMap, Marker, LoadScript} from "@react-google-maps/api";
 
-import markersList from "../../data/markers";
 import s from "./Map.module.scss";
 
-let markers = [];
-for (let i=0; i<2; i++) {
-    markers.push(markersList[i]);
-}
 
 class Map extends React.Component {
     state = {
-        center: {
-            lat: 45,
-            lng: 75,
-        },
-        zoom: 3
+        defaultCenter: {},
+        center: {},
+        zoom: 7
     };
+
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({
+                defaultCenter: {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                },
+                center: {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                },
+                zoom: this.state.zoom,
+            })
+        });
+    }
 
     componentDidUpdate(prevProps) {
         if (prevProps.activeMarker !== this.props.activeMarker) {
@@ -26,6 +35,7 @@ class Map extends React.Component {
 
     changeCenter = (lat, lng) => {
         this.setState({
+            defaultCenter: this.state.defaultCenter,
             center: {
                 lat,
                 lng
@@ -35,20 +45,30 @@ class Map extends React.Component {
     };
 
     render() {
-        const { center, zoom } = this.state;
-        const { activeMarker, onMarkerClick } = this.props;
-
+        const { defaultCenter, center, zoom } = this.state;
+        const { activeMarker, onMarkerClick, markersList, openFormHandler } = this.props;
         return (
             <LoadScript
                 googleMapsApiKey="AIzaSyAemEnOiurLbBg2C1a9YraNw95Uay-R6U8"
             >
                 <GoogleMap
                     zoom={zoom}
+                    defaultCenter={defaultCenter}
                     center={center}
-                    mapContainerStyle={ {width: "100%", height: "100vh" } }
+                    mapContainerClassName={s.mapContainer}
                 >
+                    <Marker
+                        position={{
+                            lat: defaultCenter.lat,
+                            lng: defaultCenter.lng
+                        }}
+                        onClick={()=>{
+                            openFormHandler();
+                            this.changeCenter(defaultCenter.lat, defaultCenter.lng);
+                        }}
+                    />
                     {
-                        markers.map((marker) =>
+                        markersList.map((marker) =>
                             <Marker
                                 key={marker.id}
                                 id={marker.id}
@@ -56,7 +76,6 @@ class Map extends React.Component {
                                     lat: marker.lat,
                                     lng: marker.lng
                                 }}
-                                text={marker.text}
                                 onClick={()=>{
                                     onMarkerClick(marker);
                                     this.changeCenter(marker.lat, marker.lng);

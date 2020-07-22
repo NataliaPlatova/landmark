@@ -1,3 +1,5 @@
+@import "./Mixins";
+
 .App {
   text-align: center;
 }
@@ -44,4 +46,17 @@
   box-sizing: content-box;
   display: flex;
   padding: 32px;
+  @include mediaQuery(728, max) {
+    flex-direction: column;
+    padding: 16px;
+  }
+}
+
+.sideBlock {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  @include mediaQuery(728, max) {
+    width: 100%;
+  }
 }

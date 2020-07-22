@@ -1,5 +1,14 @@
+@import "../../Mixins";
 #map {
     height: 800px;
     width: 100%;
+}
+
+.mapContainer {
+    width: 100%;
+    height: 100vh;
+    @include mediaQuery(728, max) {
+        height: 50vh;
+    }
 }
 

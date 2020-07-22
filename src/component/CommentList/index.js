@@ -2,6 +2,7 @@ import React from "react";
 
 import s from "./CommentList.module.scss";
 import Comment from "../Comment";
+import NewCommentButton from "../NewCommentButton";
 
 class CommentList extends React.Component{
     state = {

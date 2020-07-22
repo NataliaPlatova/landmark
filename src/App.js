@@ -3,6 +3,8 @@ import s from './App.module.scss';
 import CommentList from "./component/CommentList";
 import markersList from "./data/markers";
 import Map from "./component/Map";
+import NewCommentButton from "./component/NewCommentButton";
+import NewCommentForm from "./component/NewCommentForm";
 
 let markers = [];
 for (let i=0; i<2; i++) {
@@ -12,21 +14,55 @@ for (let i=0; i<2; i++) {
 class App extends React.Component{
     state = {
         activeMarker: "",
+        formIsOpened: false,
     };
 
     changeActiveMarker = (point) => {
         this.setState({
             activeMarker: point,
+            formIsOpened: this.state.formIsOpened,
         })
     };
 
+    openForm = () => {
+        this.setState({
+            activeMarker: this.state.activeMarker,
+            formIsOpened: true,
+        })
+    };
+
+    makeNewComment = (formElements) => {
+        const newComment = {
+            "id": markers.length+1,
+            "name": formElements[0].value,
+            "text": formElements[1].value,
+            "lat": 20,
+            "lng": 37.337844
+        };
+        markers.push(newComment);
+        this.setState({
+            activeMarker: this.state.activeMarker,
+            formIsOpened: false,
+        });
+    };
+
     render() {
-        const { activeMarker } = this.state;
+        const { activeMarker, formIsOpened, myPoint } = this.state;
         return (
             <div className="App">
                 <div className={s.container}>
-                    <Map onMarkerClick={this.changeActiveMarker} activeMarker={activeMarker}/>
-                    <CommentList activeComment={activeMarker} commentsList={markers} onCommentClick={this.changeActiveMarker}/>
+                    <Map onMarkerClick={this.changeActiveMarker} activeMarker={activeMarker} markersList={markers} openFormHandler={this.openForm}/>
+                    <div className={s.sideBlock}>
+                        <NewCommentButton openFormHandler={this.openForm}/>
+                        {
+                            formIsOpened?
+                                <NewCommentForm onFormSubmit={this.makeNewComment}/>:<CommentList
+                                    activeComment={activeMarker}
+                                    commentsList={markers}
+                                    onCommentClick={this.changeActiveMarker}/>
+
+                        }
+                    </div>
                 </div>
             </div>
         );
