@@ -2,15 +2,20 @@
     display: flex;
     flex-direction: column;
     width: 30%;
-    padding: 24px;
 }
 
 .commentTab {
     background-color: rgba(0, 0, 0, 0);
     text-align: left;
-    border: none;
-    padding: 0;
+    border: 1px solid white;
+
     &:hover, &:focus, &:active {
         outline: none;
+        cursor: pointer;
+        border: 1px solid blueviolet;
+    }
+
+    &_active {
+        background-color: #61dafb;
     }
 }
