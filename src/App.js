@@ -1,12 +1,16 @@
 import React from 'react';
-import './App.css';
+import s from './App.module.scss';
 import MapWrapperComponent from "./component/MapWrapperComponent";
+import CommentList from "./component/CommentList";
 
 
 function App() {
   return (
     <div className="App">
-        <MapWrapperComponent/>
+        <div className={s.container}>
+            <MapWrapperComponent/>
+            <CommentList />
+        </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import {GoogleMap, Marker} from "react-google-maps";
 
 import markersList from "../../data/markers";
-import s from "./Map.module.css";
+import s from "./Map.module.scss";
 
 let markers = [];
 for (let i=0; i<2; i++) {

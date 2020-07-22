@@ -1,6 +1,6 @@
 import React from "react";
 
-import s from "./Marker.module.css";
+import s from "./Marker.module.scss";
 
 const Marker = () => {
     return(

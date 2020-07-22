@@ -2,7 +2,7 @@ import React from "react";
 import {withScriptjs, withGoogleMap} from "react-google-maps";
 import Map from "../Map";
 
-import s from "./MapWrapperComponent.module.css";
+import s from "./MapWrapperComponent.module.scss";
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
 
