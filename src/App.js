@@ -63,7 +63,7 @@ class App extends React.Component{
 
         let filteredComments=[];
         for(let i=0; i<2; i++) {
-            if((inputMask!=="") && ((inputMask.test(markers[i].name))||(inputMask.test(markers[i].text)))) {
+            if((inputMask.length!==0) && ((inputMask.test(markers[i].name))||(inputMask.test(markers[i].text)))) {
                 filteredComments.push(markers[i]);
             }
         }
@@ -77,7 +77,7 @@ class App extends React.Component{
                             formIsOpened?
                                 <NewCommentForm onFormSubmit={this.makeNewComment}/>:<CommentList
                                     activeComment={activeMarker}
-                                    commentsList={inputMask===""? markers:filteredComments}
+                                    commentsList={inputMask.length===0? markers:filteredComments}
                                     onCommentClick={this.changeActiveMarker}
                                     searchHandler={this.changeInputMask}
                                 />
