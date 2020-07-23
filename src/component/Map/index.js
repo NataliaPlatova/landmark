@@ -62,7 +62,11 @@ class Map extends React.Component {
                             openFormHandler();
                             this.changeCenter(defaultCenter.lat, defaultCenter.lng);
                         }}
-                         position={{lat: defaultCenter.lat, lng: defaultCenter.lng}}/>
+                         position={{lat: defaultCenter.lat, lng: defaultCenter.lng}}
+                    icon={{
+                        url: "https://raw.githubusercontent.com/NataliaPlatova/landmark/master/src/img/Pin.png",
+                        scale: 0.05
+                    }}/>
                     {
                         markersList.map((marker) =>
                             <Marker
