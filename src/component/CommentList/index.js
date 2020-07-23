@@ -2,11 +2,12 @@ import React from "react";
 
 import s from "./CommentList.module.scss";
 import Comment from "../Comment";
-import NewCommentButton from "../NewCommentButton";
+import Search from "../Search";
 
 class CommentList extends React.Component{
     state = {
         commentSelected: "",
+        inputMask: "",
     };
 
     componentDidUpdate(prevProps) {
@@ -18,14 +19,17 @@ class CommentList extends React.Component{
     changeSelectedComment = (comment) => {
         this.setState({
             commentSelected: comment,
+            inputMask: this.state.inputMask,
         })
     };
 
     render() {
-        const { commentsList, activeComment, onCommentClick }=this.props;
-        const { commentSelected } = this.state;
+        const { commentsList, activeComment, onCommentClick, searchHandler }=this.props;
+        const { commentSelected, inputMask } = this.state;
+
         return(
             <div className={s.commentList}>
+                <Search onSearch={searchHandler}/>
                 {
                     commentsList.map((item) =>
                         <button

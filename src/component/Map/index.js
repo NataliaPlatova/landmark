@@ -58,15 +58,11 @@ class Map extends React.Component {
                     mapContainerClassName={s.mapContainer}
                 >
                     <Marker
-                        position={{
-                            lat: defaultCenter.lat,
-                            lng: defaultCenter.lng
-                        }}
                         onClick={()=>{
                             openFormHandler();
                             this.changeCenter(defaultCenter.lat, defaultCenter.lng);
                         }}
-                    />
+                         position={{lat: defaultCenter.lat, lng: defaultCenter.lng}}/>
                     {
                         markersList.map((marker) =>
                             <Marker
