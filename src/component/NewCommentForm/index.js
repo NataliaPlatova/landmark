@@ -6,7 +6,7 @@ class NewCommentForm extends React.Component{
     render() {
         const { onFormSubmit } = this.props;
         return(
-            <form onSubmit={(e)=>{e.preventDefault(); onFormSubmit(e.target.elements);}}>
+            <form onSubmit={(e)=>{e.preventDefault(); onFormSubmit(e.target.elements);}} className={s.form}>
                 <label>
                     Name
                     <input type="text"/>

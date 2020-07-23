@@ -10,15 +10,24 @@
     text-align: left;
     border: 1px solid white;
     order: 1;
+    border-bottom: 1px solid grey;
 
     &:hover, &:focus, &:active {
         outline: none;
         cursor: pointer;
         border: 1px solid blueviolet;
+        border-radius: 2px;
     }
 
     &_active {
-        background-color: #61dafb;
+        background-color: #ece9ef;
         order: 0;
     }
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
 }

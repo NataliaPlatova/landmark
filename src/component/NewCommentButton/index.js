@@ -6,7 +6,7 @@ class NewCommentButton extends React.Component{
     render() {
         const { openFormHandler } = this.props;
         return(
-            <div>
+            <div className={s.container}>
                 <button onClick={()=>openFormHandler()}>Add new comment</button>
             </div>
         );

@@ -2,15 +2,49 @@
   {
     "id": 1,
     "name": "Natasha",
-    "text": "I hate everyone",
+    "text": "Я уехала из Новосиба!!! Ахахахахаха!",
     "lat": 59.955413,
-    "lng": 30.337844
+    "lng": 30.337844,
+    "uid": 1
   },
   {
     "id": 2,
     "name": "Nastya",
     "text": "I love everyone",
     "lat": 30.955413,
-    "lng": 30.337844
+    "lng": 30.337844,
+    "uid": 2
+  },
+  {
+    "id": 3,
+    "name": "Anonimus",
+    "text": "To hot=(((",
+    "lat": 14,
+    "lng": 77,
+    "uid": 13
+  },
+  {
+    "id": 4,
+    "name": "Batman",
+    "text": "Come and swim with me.",
+    "lat": 35,
+    "lng": 149,
+    "uid": 88005553535
+  },
+  {
+    "id": 5,
+    "name": "BigBrother",
+    "text": "Just watching...",
+    "lat": 52,
+    "lng": 89,
+    "uid": 88005553535
+  },
+  {
+    "id": 6,
+    "name": "Hungry Caterpillar",
+    "text": "Feed me. Please. I'm starving",
+    "lat": -35.473469,
+    "lng": 149.012375,
+    "uid": 666
   }
 ]

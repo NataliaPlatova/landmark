@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  &>button {
+    width: 100%;
+    background-color: blueviolet;
+    border: none;
+    color: white;
+    height: 32px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 2px;
+    &:hover {
+      cursor: pointer;
+      opacity: 70%;
+    }
+    &:hover, &:active, &:focus {
+      outline: none;
+    }
+  }
+}

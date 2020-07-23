@@ -1,0 +1,33 @@
+.form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  &>label {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    &>input {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+  &>button {
+    width: 100%;
+    background-color: blueviolet;
+    border: none;
+    color: white;
+    height: 32px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 2px;
+    margin-top: 16px;
+    &:hover {
+      cursor: pointer;
+      opacity: 70%;
+    }
+    &:hover, &:active, &:focus {
+      outline: none;
+    }
+  }
+}

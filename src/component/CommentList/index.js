@@ -3,11 +3,11 @@ import React from "react";
 import s from "./CommentList.module.scss";
 import Comment from "../Comment";
 import Search from "../Search";
+import FilterCommentsButton from "../FilterCommentsButton";
 
 class CommentList extends React.Component{
     state = {
         commentSelected: "",
-        inputMask: "",
     };
 
     componentDidUpdate(prevProps) {
@@ -19,17 +19,19 @@ class CommentList extends React.Component{
     changeSelectedComment = (comment) => {
         this.setState({
             commentSelected: comment,
-            inputMask: this.state.inputMask,
         })
     };
 
     render() {
-        const { commentsList, activeComment, onCommentClick, searchHandler }=this.props;
-        const { commentSelected, inputMask } = this.state;
+        const { commentsList, activeComment, onCommentClick, onFiltersChange,  inputMask, uid, myUid }=this.props;
+        const { commentSelected } = this.state;
 
         return(
             <div className={s.commentList}>
-                <Search onSearch={searchHandler}/>
+                <div className={s.filters}>
+                    <Search onSearch={onFiltersChange} uid={uid} myUid={myUid}/>
+                    <FilterCommentsButton filterClickHandler={onFiltersChange} inputMask={inputMask}  myUid={myUid} />
+                </div>
                 {
                     commentsList.map((item) =>
                         <button

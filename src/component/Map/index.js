@@ -11,23 +11,20 @@ class Map extends React.Component {
         zoom: 7
     };
 
-    componentDidMount() {
-        navigator.geolocation.getCurrentPosition((position) => {
+    componentDidUpdate(prevProps) {
+        if(prevProps.myPoint !== this.props.myPoint) {
             this.setState({
                 defaultCenter: {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
+                    lat: this.props.myPoint.lat,
+                    lng: this.props.myPoint.lng
                 },
                 center: {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
+                    lat: this.props.myPoint.lat,
+                    lng: this.props.myPoint.lng
                 },
                 zoom: this.state.zoom,
-            })
-        });
-    }
-
-    componentDidUpdate(prevProps) {
+            },);
+        }
         if (prevProps.activeMarker !== this.props.activeMarker) {
             this.changeCenter(this.props.activeMarker.lat, this.props.activeMarker.lng)
         }
@@ -46,7 +43,7 @@ class Map extends React.Component {
 
     render() {
         const { defaultCenter, center, zoom } = this.state;
-        const { activeMarker, onMarkerClick, markersList, openFormHandler } = this.props;
+        const { activeMarker, onMarkerClick, markersList, myPoint } = this.props;
         return (
             <LoadScript
                 googleMapsApiKey="AIzaSyAemEnOiurLbBg2C1a9YraNw95Uay-R6U8"
@@ -59,13 +56,10 @@ class Map extends React.Component {
                 >
                     <Marker
                         onClick={()=>{
-                            openFormHandler();
                             this.changeCenter(defaultCenter.lat, defaultCenter.lng);
                         }}
                          position={{lat: defaultCenter.lat, lng: defaultCenter.lng}}
-                    icon={{
-                        url: "https://raw.githubusercontent.com/NataliaPlatova/landmark/master/src/img/Pin.png"
-                    }}/>
+                    />
                     {
                         markersList.map((marker) =>
                             <Marker
