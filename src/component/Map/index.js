@@ -64,8 +64,7 @@ class Map extends React.Component {
                         }}
                          position={{lat: defaultCenter.lat, lng: defaultCenter.lng}}
                     icon={{
-                        url: "https://raw.githubusercontent.com/NataliaPlatova/landmark/master/src/img/Pin.png",
-                        scale: 0.05
+                        url: "https://raw.githubusercontent.com/NataliaPlatova/landmark/master/src/img/Pin.png"
                     }}/>
                     {
                         markersList.map((marker) =>
