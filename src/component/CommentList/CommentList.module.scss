@@ -3,6 +3,8 @@
 .commentList {
     display: flex;
     flex-direction: column;
+    max-height: 100vh;
+    overflow-y: scroll;
 }
 
 .commentTab {
@@ -30,4 +32,10 @@
     justify-content: space-between;
     margin-bottom: 16px;
     flex-wrap: wrap;
+    input {
+        height: 28px;
+        border-width: 1px;
+        border-radius: 6px;
+        padding-left: 8px;
+    }
 }

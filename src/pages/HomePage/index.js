@@ -1,13 +1,14 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { withCookies } from 'react-cookie';
+import { connect } from 'react-redux'
 
 import s from './HomePage.module.scss';
 import CommentList from "../../component/CommentList";
-import getCommentsList from "../../services/comments";
 import Map from "../../component/Map";
 import NewCommentButton from "../../component/NewCommentButton";
 import NewCommentForm from "../../component/NewCommentForm";
+import { fetchComments } from '../../data/commentsActions';
 
 class HomePage extends React.Component{
     state = {
@@ -23,12 +24,12 @@ class HomePage extends React.Component{
 
 
     componentDidMount = async () => {
-        const comments = await this.getComments();
+        this.props.fetchComments();
         const myUid = await this.getCurrentUid();
         navigator.geolocation.getCurrentPosition((position) => {
             this.setState({
-                commentsList: comments,
-                filteredComments: comments,
+                commentsList: this.props.comments,
+                filteredComments: this.props.comments,
                 myUid: myUid,
                 myPoint: {
                     lat: position.coords.latitude,
@@ -36,15 +37,6 @@ class HomePage extends React.Component{
                 }
             });
         }, (error) => alert('Пожалуйста, включите геолокацию', error));
-    };
-
-    getComments = async() => {
-        const receivedComments = await getCommentsList();
-        let comments = [];
-        for (let i=0; i<Object.keys(receivedComments).length; i++) {
-            comments.push(receivedComments[i]);
-        }
-        return comments;
     };
 
     getCurrentUid = async() => {
@@ -153,4 +145,14 @@ class HomePage extends React.Component{
     }
 }
 
-export default withCookies(HomePage);
+const mapDispatchToProps = {
+    fetchComments
+}
+
+const mapStateToProps = (state) => {
+    return {
+        comments: state.comments.comments
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withCookies(HomePage));
