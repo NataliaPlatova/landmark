@@ -1,0 +1,31 @@
+@import "../../Mixins";
+
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: content-box;
+  display: flex;
+  padding: 32px;
+  @include mediaQuery(728, max) {
+    flex-direction: column;
+    padding: 16px;
+  }
+}
+
+.sideBlock {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding-left: 16px;
+  @include mediaQuery(728, max) {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 0;
+  }
+}
