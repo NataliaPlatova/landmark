@@ -46,19 +46,20 @@ class Map extends React.Component {
         const { activeMarker, onMarkerClick, markersList, myPoint } = this.props;
         return (
             <LoadScript
-                googleMapsApiKey="AIzaSyAemEnOiurLbBg2C1a9YraNw95Uay-R6U8"
+                googleMapsApiKey="AIzaSyCrbZ4ks0emyqNNIJtEYyODwQKsURONkog"
             >
                 <GoogleMap
                     zoom={zoom}
                     defaultCenter={defaultCenter}
                     center={center}
                     mapContainerClassName={s.mapContainer}
+                    sensor={false}
                 >
                     <Marker
                         onClick={()=>{
                             this.changeCenter(defaultCenter.lat, defaultCenter.lng);
                         }}
-                         position={{lat: defaultCenter.lat, lng: defaultCenter.lng}}
+                         position={{lat: parseFloat(defaultCenter.lat), lng: parseFloat(defaultCenter.lng)}}
                     />
                     {
                         markersList.map((marker) =>
@@ -66,12 +67,12 @@ class Map extends React.Component {
                                 key={marker.id}
                                 id={marker.id}
                                 position={{
-                                    lat: Number(marker.address.geo.lat),
-                                    lng: Number(marker.address.geo.lng)
+                                    lat: parseFloat(marker.address.geo.lat),
+                                    lng: parseFloat(marker.address.geo.lng)
                                 }}
                                 onClick={()=>{
                                     onMarkerClick(marker);
-                                    this.changeCenter(Number(marker.address.geo.lat), Number(marker.address.geo.lng));
+                                    this.changeCenter(parseFloat(marker.address.geo.lat), parseFloat(marker.address.geo.lng));
                                 }}
                             />
                         )
