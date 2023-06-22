@@ -1,22 +1,13 @@
 {
   "files": {
-    "main.css": "/landmark/static/css/main.879b5b2c.chunk.css",
-    "main.js": "/landmark/static/js/main.91ba7cdd.chunk.js",
-    "main.js.map": "/landmark/static/js/main.91ba7cdd.chunk.js.map",
-    "runtime-main.js": "/landmark/static/js/runtime-main.f465d91a.js",
-    "runtime-main.js.map": "/landmark/static/js/runtime-main.f465d91a.js.map",
-    "static/js/2.b34e9226.chunk.js": "/landmark/static/js/2.b34e9226.chunk.js",
-    "static/js/2.b34e9226.chunk.js.map": "/landmark/static/js/2.b34e9226.chunk.js.map",
+    "main.css": "/landmark/static/css/main.e7fa8712.css",
+    "main.js": "/landmark/static/js/main.6bccb2f5.js",
     "index.html": "/landmark/index.html",
-    "precache-manifest.1f051ee27586aa5cb58051be60dd0860.js": "/landmark/precache-manifest.1f051ee27586aa5cb58051be60dd0860.js",
-    "service-worker.js": "/landmark/service-worker.js",
-    "static/css/main.879b5b2c.chunk.css.map": "/landmark/static/css/main.879b5b2c.chunk.css.map",
-    "static/js/2.b34e9226.chunk.js.LICENSE.txt": "/landmark/static/js/2.b34e9226.chunk.js.LICENSE.txt"
+    "main.e7fa8712.css.map": "/landmark/static/css/main.e7fa8712.css.map",
+    "main.6bccb2f5.js.map": "/landmark/static/js/main.6bccb2f5.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.f465d91a.js",
-    "static/js/2.b34e9226.chunk.js",
-    "static/css/main.879b5b2c.chunk.css",
-    "static/js/main.91ba7cdd.chunk.js"
+    "static/css/main.e7fa8712.css",
+    "static/js/main.6bccb2f5.js"
   ]
 }
