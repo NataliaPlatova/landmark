@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 import s from "./NewCommentButton.module.scss";
 
-class NewCommentButton extends React.Component{
-    render() {
-        const { openFormHandler } = this.props;
-        return(
-            <div className={s.container}>
-                <button onClick={()=>openFormHandler()}>Add new comment</button>
-            </div>
-        );
-    }
-}
+const NewCommentButton = (props) => {
+    const { openFormHandler } = props;
+    const [isShrinked, setIsShrinked] = useState(true);
+    return (
+        <div className={s.container}>
+            <button
+                className={s.shrinked}
+                onMouseEnter={() => setIsShrinked(false)}
+                onMouseLeave={() => setIsShrinked(true)}
+                onClick={() => openFormHandler()}
+            >
+                 +
+            </button>
+            {!isShrinked && <div>Add new comment</div>}
+        </div>
+    );
+};
 
 export default NewCommentButton;

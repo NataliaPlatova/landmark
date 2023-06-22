@@ -56,7 +56,6 @@ class HomePage extends React.Component {
                 },
             });
         }
-        console.log(comments);
         return comments;
     };
 

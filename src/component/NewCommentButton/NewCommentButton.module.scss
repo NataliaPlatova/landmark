@@ -1,22 +1,30 @@
 .container {
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 16px;
-  &>button {
     width: 100%;
-    background-color: blueviolet;
-    border: none;
-    color: white;
-    height: 32px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 2px;
-    &:hover {
-      cursor: pointer;
-      background-color: #aa6ce2;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    & > button {
+        background-color: blueviolet;
+        border: none;
+        color: white;
+        height: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        transition-duration: 500ms;
+        &.expanded {
+            border-radius: 2px;
+            width: 100%;
+        }
+        &.shrinked {
+          border-radius: 50%;
+          width: 32px;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+        &:hover,
+        &:active,
+        &:focus {
+            outline: none;
+        }
     }
-    &:hover, &:active, &:focus {
-      outline: none;
-    }
-  }
 }
