@@ -1,40 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 
 import s from "./Map.module.scss";
+import { shallowEqual, useSelector } from "react-redux";
 
-class Map extends React.Component {
-    state = {
+const Map = (props) => {
+    const { activeMarker, onMarkerClick, myPoint } = props;
+    const markersList = useSelector(
+        (state) =>
+            state.comments.comments.map((comment) => {
+                return {
+                    id: comment.id,
+                    lat: comment.address.geo.lat,
+                    lng: comment.address.geo.lng,
+                };
+            }),
+        shallowEqual,
+    );
+
+    const [coords, setCoords] = useState({
         defaultCenter: {},
         center: {},
         zoom: 7,
-    };
+    });
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.myPoint !== this.props.myPoint) {
-            this.setState({
+    useEffect(() => {
+        if (myPoint !== coords.myPoint) {
+            setCoords({
                 defaultCenter: {
-                    lat: Number(this.props.myPoint.lat),
-                    lng: Number(this.props.myPoint.lng),
+                    lat: Number(myPoint.lat),
+                    lng: Number(myPoint.lng),
                 },
                 center: {
-                    lat: Number(this.props.myPoint.lat),
-                    lng: Number(this.props.myPoint.lng),
+                    lat: Number(myPoint.lat),
+                    lng: Number(myPoint.lng),
                 },
-                zoom: this.state.zoom,
+                zoom: coords.zoom,
             });
         }
-        if (prevProps.activeMarker !== this.props.activeMarker) {
-            this.changeCenter(
-                Number(this.props.activeMarker.address.geo.lat),
-                Number(this.props.activeMarker.address.geo.lng),
-            );
+        if (!!activeMarker) {
+            changeCenter(Number(activeMarker.lat), Number(activeMarker.lng));
         }
-    }
+    }, [myPoint.lat, myPoint.lng, activeMarker]);
 
-    changeCenter = (lat, lng) => {
-        this.setState({
-            defaultCenter: this.state.defaultCenter,
+    const changeCenter = (lat, lng) => {
+        setCoords({
+            defaultCenter: coords.defaultCenter,
             center: {
                 lat,
                 lng,
@@ -43,45 +54,41 @@ class Map extends React.Component {
         });
     };
 
-    render() {
-        const { defaultCenter, center, zoom } = this.state;
-        const { activeMarker, onMarkerClick, /*markersList,*/ myPoint } = this.props;
-        return (
-            <LoadScript googleMapsApiKey="AIzaSyCrbZ4ks0emyqNNIJtEYyODwQKsURONkog">
-                <GoogleMap
-                    zoom={zoom}
-                    defaultCenter={defaultCenter}
-                    center={center}
-                    mapContainerClassName={s.mapContainer}
-                    sensor={false}
-                >
+    return (
+        <LoadScript googleMapsApiKey="AIzaSyCrbZ4ks0emyqNNIJtEYyODwQKsURONkog">
+            <GoogleMap
+                zoom={coords.zoom}
+                defaultCenter={coords.defaultCenter}
+                center={coords.center}
+                mapContainerClassName={s.mapContainer}
+                sensor={false}
+            >
+                <Marker
+                    onClick={() => {
+                        changeCenter(coords.defaultCenter.lat, coords.defaultCenter.lng);
+                    }}
+                    position={{
+                        lat: parseFloat(coords.defaultCenter.lat),
+                        lng: parseFloat(coords.defaultCenter.lng),
+                    }}
+                />
+                {markersList.map((marker) => (
                     <Marker
-                        onClick={() => {
-                            this.changeCenter(defaultCenter.lat, defaultCenter.lng);
-                        }}
+                        key={marker.id}
+                        id={marker.id}
                         position={{
-                            lat: parseFloat(defaultCenter.lat),
-                            lng: parseFloat(defaultCenter.lng),
+                            lat: parseFloat(marker.lat),
+                            lng: parseFloat(marker.lng),
+                        }}
+                        onClick={() => {
+                            onMarkerClick(marker);
+                            changeCenter(parseFloat(marker.lat), parseFloat(marker.lng));
                         }}
                     />
-                    {/*markersList.map((marker) =>
-                            <Marker
-                                key={marker.id}
-                                id={marker.id}
-                                position={{
-                                    lat: parseFloat(marker.address.geo.lat),
-                                    lng: parseFloat(marker.address.geo.lng)
-                                }}
-                                onClick={()=>{
-                                    onMarkerClick(marker);
-                                    this.changeCenter(parseFloat(marker.address.geo.lat), parseFloat(marker.address.geo.lng));
-                                }}
-                            />
-                        )*/}
-                </GoogleMap>
-            </LoadScript>
-        );
-    }
-}
+                ))}
+            </GoogleMap>
+        </LoadScript>
+    );
+};
 
 export default Map;

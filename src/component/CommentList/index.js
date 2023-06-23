@@ -9,7 +9,7 @@ import { CommentListActions } from "../../actions/CommentActions";
 
 const CommentList = (props) => {
     const { activeComment, onCommentClick, onFiltersChange, inputMask, uid, myUid } = props;
-    const [commentSelected, setCommentSelected] = useState("");
+    const [commentSelected, setCommentSelected] = useState(activeComment);
     const dispatch = useDispatch();
     const commentsList = useSelector((state) => state.comments.comments, shallowEqual);
 
@@ -17,8 +17,20 @@ const CommentList = (props) => {
         dispatch(CommentListActions.getComments());
     }, []);
 
+    useEffect(() => {
+        setCommentSelected(activeComment.id);
+    }, [activeComment.id]);
+
+    useEffect(() => {
+        if (commentsList.length > 0) {
+            setCommentSelected(commentsList[0].id);
+        }
+    }, [commentsList.length]);
+
     const changeSelectedComment = (comment) => {
-        setCommentSelected(comment.id);
+        if (activeComment.id !== comment.id) {
+            onCommentClick(comment);
+        }
     };
 
     return (
@@ -35,7 +47,7 @@ const CommentList = (props) => {
                 commentsList.length &&
                 commentsList.map((item) => (
                     <button
-                        onClick={() => onCommentClick(item)}
+                        onClick={() => changeSelectedComment(item)}
                         className={
                             commentSelected === item.id
                                 ? `${s.commentTab} ${s.commentTab_active}`

@@ -62,7 +62,7 @@ class HomePage extends React.Component {
         return currentUuid;
     };
 
-    changeActiveMarker = (point) => {
+    changeActiveComment = (point) => {
         const activeMarker = {
             ...point,
             address: {
@@ -74,11 +74,24 @@ class HomePage extends React.Component {
                 },
             },
         };
-        this.setState({
-            activeMarker: activeMarker,
-            formIsOpened: this.state.formIsOpened,
-        });
+        this.setActiveMarker(activeMarker);
     };
+
+    changeActiveCommentByMap = (point) => {
+        const activeMarker = {
+            ...point,
+            address: {
+                geo: {
+                    lat: parseFloat(point.lat),
+                    lng: parseFloat(point.lng),
+                },
+            },
+        };
+        this.setActiveMarker(activeMarker);
+    };
+
+    setActiveMarker = (activeMarker) =>
+        this.setState({ ...this.state, activeMarker: activeMarker });
 
     openForm = () => {
         this.setState({
@@ -133,15 +146,14 @@ class HomePage extends React.Component {
             <>
                 <div className={s.container}>
                     <Map
-                        onMarkerClick={this.changeActiveMarker}
-                        activeMarker={activeMarker}
-                        //markersList={commentsList}
+                        onMarkerClick={this.changeActiveCommentByMap}
+                        activeMarker={activeMarker.address?.geo || undefined}
                         myPoint={myPoint}
                     />
                     <div className={s.sideBlock}>
                         <CommentList
                             activeComment={activeMarker}
-                            onCommentClick={this.changeActiveMarker}
+                            onCommentClick={this.changeActiveComment}
                             onFiltersChange={this.changeDisplayedComments}
                             inputMask={inputMask}
                             uid={uid}

@@ -13,8 +13,12 @@ const NewCommentForm = (props) => {
             id: moment().format(),
             name: formElements[0].value,
             website: formElements[1].value,
-            lat: myPoint.lat,
-            lng: myPoint.lng,
+            address: {
+                geo: {
+                    lat: myPoint.lat,
+                    lng: myPoint.lng,
+                },
+            },
             uid: myUid,
         };
         dispatch(CommentListActions.createComment(newComment));
