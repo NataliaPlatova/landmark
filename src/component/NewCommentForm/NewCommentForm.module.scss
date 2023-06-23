@@ -1,33 +1,45 @@
 .form {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  &>label {
-    display: block;
-    width: 100%;
     box-sizing: border-box;
-    &>input {
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    & > input {
+        display: block;
+        width: 100%;
+
+        margin-bottom: 16px;
+        box-sizing: border-box;
     }
-  }
-  &>button {
-    width: 100%;
-    background-color: blueviolet;
-    border: none;
-    color: white;
-    height: 32px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 2px;
-    margin-top: 16px;
-    &:hover {
-      cursor: pointer;
-      background-color: #aa6ce2;
+    & button {
+        width: 100%;
+        border: none;
+        height: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 2px;
+        margin-top: 16px;
+        &:first-child {
+            background-color: white;
+            border: 1px solid blueviolet;
+            color: blueviolet;
+            margin-right: 4px;
+        }
+        &:last-child {
+            background-color: blueviolet;
+            color: white;
+            margin-left: 4px;
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: #aa6ce2;
+            color: white;
+        }
+        &:hover,
+        &:active,
+        &:focus {
+            outline: none;
+        }
     }
-    &:hover, &:active, &:focus {
-      outline: none;
+    & > .formClose {
+        display: flex;
     }
-  }
 }

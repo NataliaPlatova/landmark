@@ -92,6 +92,12 @@ class HomePage extends React.Component {
             formIsOpened: true,
         });
     };
+    closeForm = () => {
+        this.setState({
+            ...this.state,
+            formIsOpened: false,
+        });
+    };
 
     makeNewComment = (formElements) => {
         const newComment = {
@@ -165,7 +171,10 @@ class HomePage extends React.Component {
                     />
                     <div className={s.sideBlock}>
                         {formIsOpened ? (
-                            <NewCommentForm onFormSubmit={this.makeNewComment} />
+                            <NewCommentForm
+                                onFormSubmit={this.makeNewComment}
+                                onDismiss={this.closeForm}
+                            />
                         ) : (
                             <CommentList
                                 activeComment={activeMarker}
