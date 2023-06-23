@@ -164,7 +164,6 @@ class HomePage extends React.Component {
                         myPoint={myPoint}
                     />
                     <div className={s.sideBlock}>
-                        {formIsOpened ? "" : <NewCommentButton openFormHandler={this.openForm} />}
                         {formIsOpened ? (
                             <NewCommentForm onFormSubmit={this.makeNewComment} />
                         ) : (
@@ -183,6 +182,7 @@ class HomePage extends React.Component {
                             />
                         )}
                     </div>
+                    {!formIsOpened && <NewCommentButton openFormHandler={this.openForm} />}
                 </div>
             </>
         );

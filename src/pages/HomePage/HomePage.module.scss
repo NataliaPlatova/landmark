@@ -1,31 +1,38 @@
 @import "../../Mixins";
 
 #map {
-  height: 400px;
-  width: 100%;
+    height: 400px;
+    width: 100%;
 }
 
 .container {
-  max-width: 1440px;
-  margin: 0 auto;
-  overflow: hidden;
-  box-sizing: content-box;
-  display: flex;
-  padding: 32px;
-  @include mediaQuery(728, max) {
-    flex-direction: column;
-    padding: 16px;
-  }
+    margin: 0 auto;
+    overflow: hidden;
+    box-sizing: border-box;
+    max-height: 100vh;
+    display: flex;
+    padding: 32px;
+    position: relative;
+    @include mediaQuery(728, max) {
+        flex-direction: column;
+        padding: 16px;
+    }
 }
 
 .sideBlock {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  padding-left: 16px;
-  @include mediaQuery(728, max) {
-    width: 100%;
-    box-sizing: border-box;
-    padding-left: 0;
-  }
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding-left: 16px;
+    max-height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    @include mediaQuery(728, max) {
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 0;
+    }
 }

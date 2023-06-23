@@ -7,15 +7,19 @@ const NewCommentButton = (props) => {
     const [isShrinked, setIsShrinked] = useState(true);
     return (
         <div className={s.container}>
+            {!isShrinked && (
+                <div className={s.tooltip}>
+                    <span>Add new comment</span>
+                </div>
+            )}
             <button
                 className={s.shrinked}
                 onMouseEnter={() => setIsShrinked(false)}
                 onMouseLeave={() => setIsShrinked(true)}
                 onClick={() => openFormHandler()}
             >
-                 +
+                +
             </button>
-            {!isShrinked && <div>Add new comment</div>}
         </div>
     );
 };
