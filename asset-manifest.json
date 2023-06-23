@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/landmark/static/css/main.b15929b8.css",
-    "main.js": "/landmark/static/js/main.cf79f279.js",
+    "main.js": "/landmark/static/js/main.c25467be.js",
     "index.html": "/landmark/index.html",
     "main.b15929b8.css.map": "/landmark/static/css/main.b15929b8.css.map",
-    "main.cf79f279.js.map": "/landmark/static/js/main.cf79f279.js.map"
+    "main.c25467be.js.map": "/landmark/static/js/main.c25467be.js.map"
   },
   "entrypoints": [
     "static/css/main.b15929b8.css",
-    "static/js/main.cf79f279.js"
+    "static/js/main.c25467be.js"
   ]
 }
