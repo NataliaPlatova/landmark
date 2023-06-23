@@ -1,10 +1,8 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { withCookies } from "react-cookie";
-
 import s from "./HomePage.module.scss";
 import CommentList from "../../component/CommentList";
-import getCommentsList from "../../services/comments";
 import Map from "../../component/Map";
 import NewCommentButton from "../../component/NewCommentButton";
 import NewCommentForm from "../../component/NewCommentForm";
@@ -13,7 +11,6 @@ class HomePage extends React.Component {
     state = {
         activeMarker: "",
         formIsOpened: false,
-        commentsList: [],
         filteredComments: [],
         inputMask: "",
         uid: "",
@@ -22,13 +19,10 @@ class HomePage extends React.Component {
     };
 
     componentDidMount = async () => {
-        const comments = await this.getComments();
         const myUid = await this.getCurrentUid();
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 this.setState({
-                    commentsList: comments,
-                    filteredComments: comments,
                     myUid: myUid,
                     myPoint: {
                         lat: position.coords.latitude,
@@ -40,8 +34,8 @@ class HomePage extends React.Component {
         );
     };
 
-    getComments = async () => {
-        const receivedComments = await getCommentsList();
+    /*getComments = () => {
+        /*const receivedComments = await getCommentsList();
         let comments = [];
         for (let i = 0; i < Object.keys(receivedComments).length; i++) {
             const currentComment = receivedComments[i];
@@ -57,7 +51,7 @@ class HomePage extends React.Component {
             });
         }
         return comments;
-    };
+    };*/
 
     getCurrentUid = async () => {
         let currentUuid = this.props.cookies.get("uuid");
@@ -143,22 +137,13 @@ class HomePage extends React.Component {
         }
 
         this.setState({
-            filteredComments: usersComments,
+            //filteredComments: usersComments,
             inputMask: mask,
             uid: uid,
         });
     };
     render() {
-        const {
-            activeMarker,
-            formIsOpened,
-            myPoint,
-            inputMask,
-            commentsList,
-            filteredComments,
-            uid,
-            myUid,
-        } = this.state;
+        const { activeMarker, formIsOpened, myPoint, inputMask, uid, myUid } = this.state;
         const { cookies } = this.props;
         return (
             <>
@@ -166,7 +151,7 @@ class HomePage extends React.Component {
                     <Map
                         onMarkerClick={this.changeActiveMarker}
                         activeMarker={activeMarker}
-                        markersList={commentsList}
+                        //markersList={commentsList}
                         myPoint={myPoint}
                     />
                     <div className={s.sideBlock}>
@@ -178,11 +163,6 @@ class HomePage extends React.Component {
                         ) : (
                             <CommentList
                                 activeComment={activeMarker}
-                                commentsList={
-                                    commentsList.length === filteredComments.length
-                                        ? commentsList
-                                        : filteredComments
-                                }
                                 onCommentClick={this.changeActiveMarker}
                                 onFiltersChange={this.changeDisplayedComments}
                                 inputMask={inputMask}
