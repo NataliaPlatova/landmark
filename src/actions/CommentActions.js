@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS } from "../data/types";
+import { CREATE_COMMENT, FETCH_COMMENTS } from "../data/types";
 import getCommentsList from "../services/comments";
 
 export const CommentListActions = {
@@ -8,6 +8,14 @@ export const CommentListActions = {
             dispatch({
                 type: FETCH_COMMENTS,
                 payload: fetchedComments,
+            });
+        };
+    },
+    createComment(comment) {
+        return (dispatch) => {
+            dispatch({
+                type: CREATE_COMMENT,
+                payload: comment,
             });
         };
     },

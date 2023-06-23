@@ -1,17 +1,25 @@
-import { FETCH_COMMENTS } from "./types"
+import { CREATE_COMMENT, FETCH_COMMENTS } from "./types";
 
 const initialState = {
-    comments: []
-}
+    comments: [],
+};
 
-export const commentsReducer = (state=initialState, action) => {
+export const commentsReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_COMMENTS: {
-            return ({
+            return {
                 ...state,
-                comments: action.payload
-            })
+                comments: action.payload,
+            };
         }
-        default: return state
+        case CREATE_COMMENT: {
+            state.comments.unshift(action.payload);
+            return {
+                ...state,
+                comments: state.comments,
+            };
+        }
+        default:
+            return state;
     }
-}
+};

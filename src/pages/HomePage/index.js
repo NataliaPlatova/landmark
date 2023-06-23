@@ -93,22 +93,6 @@ class HomePage extends React.Component {
         });
     };
 
-    makeNewComment = (formElements) => {
-        const newComment = {
-            id: this.state.commentsList.length + 1,
-            name: formElements[0].value,
-            text: formElements[1].value,
-            lat: this.state.myPoint.lat,
-            lng: this.state.myPoint.lng,
-            uid: this.state.myUid,
-        };
-        this.state.commentsList.push(newComment);
-        this.setState({
-            activeMarker: this.state.activeMarker,
-            formIsOpened: false,
-        });
-    };
-
     changeDisplayedComments = (mask, uid) => {
         let searchedComments = [];
         let usersComments = [];
@@ -166,8 +150,9 @@ class HomePage extends React.Component {
                     </div>
                     {formIsOpened ? (
                         <NewCommentForm
-                            onFormSubmit={this.makeNewComment}
                             onDismiss={this.closeForm}
+                            myPoint={this.state.myPoint}
+                            myUid={this.state.myUid}
                         />
                     ) : (
                         <NewCommentButton openFormHandler={this.openForm} />
