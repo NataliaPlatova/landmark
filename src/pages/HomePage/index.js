@@ -155,23 +155,23 @@ class HomePage extends React.Component {
                         myPoint={myPoint}
                     />
                     <div className={s.sideBlock}>
-                        {formIsOpened ? (
-                            <NewCommentForm
-                                onFormSubmit={this.makeNewComment}
-                                onDismiss={this.closeForm}
-                            />
-                        ) : (
-                            <CommentList
-                                activeComment={activeMarker}
-                                onCommentClick={this.changeActiveMarker}
-                                onFiltersChange={this.changeDisplayedComments}
-                                inputMask={inputMask}
-                                uid={uid}
-                                myUid={myUid}
-                            />
-                        )}
+                        <CommentList
+                            activeComment={activeMarker}
+                            onCommentClick={this.changeActiveMarker}
+                            onFiltersChange={this.changeDisplayedComments}
+                            inputMask={inputMask}
+                            uid={uid}
+                            myUid={myUid}
+                        />
                     </div>
-                    {!formIsOpened && <NewCommentButton openFormHandler={this.openForm} />}
+                    {formIsOpened ? (
+                        <NewCommentForm
+                            onFormSubmit={this.makeNewComment}
+                            onDismiss={this.closeForm}
+                        />
+                    ) : (
+                        <NewCommentButton openFormHandler={this.openForm} />
+                    )}
                 </div>
             </>
         );
